@@ -213,32 +213,32 @@ def eval_model(args):
     anchor_indices = np.arange(0, num_anchor_image)
 
     image_paths = [
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/LIVE_VQC/Video/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/KoNViD_1k/KoNViD_1k_videos/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/youtube_ugc/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/live_yt_gaming/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/cgvds/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/LSVQ/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/LSVQ/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/kvq/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/waterloo_ivc_4k/",
-            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/live_yt_hfr/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/test_data/LIVE_VQC/Video/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/test_data/KoNViD_1k/KoNViD_1k_videos/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/youtube_ugc/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/test_data/live_yt_gaming/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/test_data/cgvds/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/LSVQ/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/LSVQ/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/test_data/kvq/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/test_data/waterloo_ivc_4k/",
+            "/mnt/shared-storage-user/xxx-1/tos/xxx-3/xxx-2/data/test_data/live_yt_hfr/",
         ]
     
     motion_features = [
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_live_vqc/",
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_konvid_1k/",
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_youtube_ugc/",
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/live_yt_gaming_slowfast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/cgvds_slowfast_feature/",      
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/LSVQ_Train_SlowFast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/LSVQ_Test_SlowFast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/kvq_slowfast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/waterloo_slowfast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/live_hfr_slowfast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_live_vqc/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_konvid_1k/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_youtube_ugc/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/live_yt_gaming_slowfast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/cgvds_slowfast_feature/",      
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/LSVQ_Train_SlowFast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/LSVQ_Test_SlowFast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/kvq_slowfast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/waterloo_slowfast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/live_hfr_slowfast_feature/",
     ]
     anchor_image_path = "./llava/eval/anchor_videos/videos/"
-    # anchor_image_path = "/data2/caolinhan/video_database/train_70w/videos/"
+    # anchor_image_path = "/data2/xxx-2/video_database/train_70w/videos/"
     anchor_motion_path = "./llava/eval/anchor_videos/slowfast_feature/"
 
     json_prefix = './llava/eval/pair_json_path/'
@@ -397,7 +397,7 @@ def eval_model(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/weights/llava_qwen_stage1")
+    parser.add_argument("--model-path", type=str, default="/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/weights/llava_qwen_stage1")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--image-folder", type=str, default="")
     parser.add_argument("--extra-prompt", type=str, default="")
