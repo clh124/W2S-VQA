@@ -40,7 +40,7 @@ class VideoDataset_NR_SlowFast_feature(data.Dataset):
         video_name_str = video_name[:-4]
         filename=os.path.join(self.videos_dir, video_name)
 
-        # if os.path.exists(os.path.join('/data2/caolinhan/video_database/SlowFast_feature/jitter2/', video_name_str)):
+        # if os.path.exists(os.path.join('/data2/xxx-1/video_database/SlowFast_feature/jitter2/', video_name_str)):
         #     print(video_name, "has been processed!")
         #     return torch.ones((3, 224, 224)), video_name_str
 
