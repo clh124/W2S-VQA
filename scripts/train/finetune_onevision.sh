@@ -31,7 +31,7 @@ deepspeed --include localhost:0,1,2,3,4,5,6,7 --master_port 25801 ./llava/train/
     --mm_tunable_parts mm_vision_tower,mm_mlp_adapter,mm_slowfast_projector \
     --video_folder /mnt/shared-storage-user/xxx-3/tos/xxx-1/xxx-2/data/data/xxx-2_data/video_database/train_30w/videos \
     --slowfast_feature_folder /mnt/shared-storage-user/ailab-pceval/xxx-3/xxx-2/data/slowfast_feature/ \
-    --image_folder /mnt/shared-storage-user/ailab-pceval/xxx-3/xxx-2/data/mnt/nvme1n1/clh/train_10w/dis_image3/ \
+    --image_folder /mnt/shared-storage-user/ailab-pceval/xxx-3/xxx-2/data/mnt/nvme1n1/xxx-4/train_10w/dis_image3/ \
     --mm_vision_tower_lr 2e-6 \
     --vision_tower ${VISION_MODEL_VERSION} \
     --mm_projector_type mlp2x_gelu \
