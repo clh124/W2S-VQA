@@ -30,3 +30,10 @@ Before training, make sure to **modify the file paths** in the script according 
 ```bash
 bash scripts/train/finetune_onevision.sh
 ```
+
+## Quick Inference
+
+```shell
+python infer_pair.py --model-path path/to/save_weights
+```
+

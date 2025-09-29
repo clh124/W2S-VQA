@@ -5,7 +5,6 @@ import json
 from tqdm import tqdm
 import numpy as np
 import shortuuid
-os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 os.environ['HF_ENDPOINT']= 'https://hf-mirror.com'
 import torch
 from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
@@ -22,6 +21,7 @@ from collections import defaultdict
 from PIL import Image
 import math
 from scipy.stats import spearmanr, pearsonr
+from ref_pair import cal_anchor_matrix
 
 rng = np.random.default_rng()
 
@@ -204,18 +204,8 @@ def eval_model(args):
     os.makedirs(f"results/{args.model_path.split('/')[-1]}/", exist_ok=True)
 
 
-    anchor_matrix = np.array(
-        [[5.00000000e-01, 2.61617695e-02, 3.31322070e-04, 1.24748972e-05,
-        4.05243728e-06],
-        [9.73838231e-01, 5.00000000e-01, 1.90565984e-01, 1.08383365e-03,
-        1.81464739e-05],
-        [9.99668678e-01, 8.09434016e-01, 5.00000000e-01, 5.00283557e-02,
-        7.76283304e-05],
-        [9.99987525e-01, 9.98916166e-01, 9.49971644e-01, 5.00000000e-01,
-        1.12637685e-02],
-        [9.99995948e-01, 9.99981854e-01, 9.99922372e-01, 9.88736232e-01,
-        5.00000000e-01]]
-        , dtype=np.float32)
+    anchor_matrix = cal_anchor_matrix(args)
+    print("anchor_matrix:", anchor_matrix)
 
     anchor_intervals = 5#16
     num_anchor_image_per_interval = 1
@@ -223,54 +213,51 @@ def eval_model(args):
     anchor_indices = np.arange(0, num_anchor_image)
 
     image_paths = [
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/LIVE_VQC/Video/",
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/KoNViD_1k/KoNViD_1k_videos/",
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/youtube_ugc/",
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/live_yt_gaming/",
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/cgvds/",
+            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/LIVE_VQC/Video/",
+            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/KoNViD_1k/KoNViD_1k_videos/",
+            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/youtube_ugc/",
+            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/live_yt_gaming/",
+            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/cgvds/",
+            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/LSVQ/",
+            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/LSVQ/",
             "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/kvq/",
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/LSVQ/",
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/LSVQ/",
             "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/waterloo_ivc_4k/",
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/live_yt_hfr/",
-            # "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/VDPVE/",
+            "/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/test_data/live_yt_hfr/",
         ]
     
     motion_features = [
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_live_vqc/",
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_konvid_1k/",
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_youtube_ugc/",
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/live_yt_gaming_slowfast_feature/",
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/cgvds_slowfast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_live_vqc/",
+        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_konvid_1k/",
+        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/slowfast_feature_youtube_ugc/",
+        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/live_yt_gaming_slowfast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/cgvds_slowfast_feature/",      
+        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/LSVQ_Train_SlowFast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/LSVQ_Test_SlowFast_feature/",
         "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/kvq_slowfast_feature/",
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/LSVQ_Train_SlowFast_feature/",
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/LSVQ_Test_SlowFast_feature/",
         "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/waterloo_slowfast_feature/",
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/live_hfr_slowfast_feature/",
-        # "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/vdpve_slowfast_feature/",
+        "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/data/slowfast_feature/live_hfr_slowfast_feature/",
     ]
-    anchor_image_path = "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/code/llm_pair_vqa_confidence_loss/llava/eval/anchor_videos/videos/"
+    anchor_image_path = "./llava/eval/anchor_videos/videos/"
     # anchor_image_path = "/data2/caolinhan/video_database/train_70w/videos/"
-    anchor_motion_path = "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/code/llm_pair_vqa_confidence_loss/llava/eval/anchor_videos/slowfast_feature/"
+    anchor_motion_path = "./llava/eval/anchor_videos/slowfast_feature/"
 
-    json_prefix = '/mnt/shared-storage-user/zhuxiangyang/tos/wenfarong/caolinhan/data/pair_json_path/'
+    json_prefix = './llava/eval/pair_json_path/'
     
     jsons = [
-            # json_prefix + "LIVE-VQC_total_ds_score.json",
-            # json_prefix + "Konvid-1k_total_ds_score.json",
-            # json_prefix + "youtube_ugc_total.json",
-            # json_prefix + "LIVE-YT-Gaming_total_score.json",
-            # json_prefix+ "CGVDS_total_score.json",
+            json_prefix + "LIVE-VQC_total_ds_score.json",
+            json_prefix + "Konvid-1k_total_ds_score.json",
+            json_prefix + "youtube_ugc_total.json",
+            json_prefix + "LIVE-YT-Gaming_total_score.json",
+            json_prefix+ "CGVDS_total_score.json",
+            json_prefix + "LSVQ_whole_test_ds_score.json",
+            json_prefix + "LSVQ_whole_test_1080p_ds_score.json",
             json_prefix + "kvq_train_score.json",
-            # json_prefix + "LSVQ_whole_test_ds_score.json",
-            # json_prefix + "LSVQ_whole_test_1080p_ds_score.json",
             json_prefix + "Waterloo_IVC_4K_total_score2.json",
-            # json_prefix + "live_hfr_total_score.json",
-            # json_prefix + "VDPVE_train_score.json",
+            json_prefix + "live_hfr_total_score.json",
         ]
 
     # 存放结果的 CSV 文件的文件夹
-    csv_output_folder = "/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/code/llm_pair_vqa_confidence_loss/results/test_stage2_no_label_refinement/"  # 修改为你希望存放 CSV 文件的文件夹
+    csv_output_folder = "./results/"  # 修改为你希望存放 CSV 文件的文件夹
 
     # 确保目标文件夹存在
     os.makedirs(csv_output_folder, exist_ok=True)
@@ -311,11 +298,13 @@ def eval_model(args):
             pre_soft_score = []
             for i, llddata in enumerate(tqdm(iqadata["annotations"], desc="Evaluating [{}]".format(json_.split("/")[-1]))):
 
-                try:
+                # try:
+                if True:
 
                     llddata["image_id"] = llddata["image_id"] if llddata["image_id"].endswith('.mp4') else llddata["image_id"] + '.mp4'
 
                     filename = image_path + llddata["image_id"]
+                    print("filename", filename)
                     gt_score = llddata["score"]
                     probabilities = []
                     slowfast_feature2 = load_motion_feature(llddata["image_id"][:-4], motion_feature)
@@ -357,19 +346,19 @@ def eval_model(args):
                             llddata["logits"]["similar"] += output_logits.mean(0)[4428].item()
                             llddata["logits"]["worse"] += output_logits.mean(0)[10960].item()
                             llddata["logits"]["inferior"] += output_logits.mean(0)[37179].item()
-                            print(llddata["logits"])
+                            # print(llddata["logits"])
                             comparison = llddata
                             t = 5
                             logits = np.array([comparison["logits"]["inferior"]/t, comparison["logits"]["worse"]/t, comparison["logits"]["similar"]/t, comparison["logits"]["better"]/t, comparison["logits"]["superior"]/t])
                             probability = softmax(logits)
                             preference = np.inner(probability, np.array([0,0.25,0.5,0.75,1.]))
-                            print("preference", preference)
+                            # print("preference", preference)
                             probabilities.append(preference)
 
 
                             llddata["pr_score"] = wa5(llddata["logits"])
 
-                            print(llddata["pr_score"], llddata["score"])
+                            # print(llddata["pr_score"], llddata["score"])
                             # with torch.inference_mode():
                             #     output_ids = model.generate(
                             #         input_ids,
@@ -399,8 +388,8 @@ def eval_model(args):
                         print("Spearmanr", spearmanr(pre_soft_score, gt_scores)[0], "Pearson", pearsonr(pre_soft_score, gt_scores)[0])
                     
 
-                # else:
-                except:
+                else:
+                # except:
                     print(filename, "not exists!")
             
 
@@ -408,7 +397,7 @@ def eval_model(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/weights/llava_qwen_stage2_no_lable_refinement/")
+    parser.add_argument("--model-path", type=str, default="/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/weights/llava_qwen_stage1")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--image-folder", type=str, default="")
     parser.add_argument("--extra-prompt", type=str, default="")

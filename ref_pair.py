@@ -5,7 +5,6 @@ import json
 from tqdm import tqdm
 import numpy as np
 import shortuuid
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 os.environ['HF_ENDPOINT']= 'https://hf-mirror.com'
 import torch
 from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
@@ -60,7 +59,7 @@ def load_video(video_file):
 
 
 def load_motion_feature(image_id):
-    motion_root = '/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/code/llm_pair_vqa_confidence_loss/llava/eval/anchor_videos/slowfast_feature/'
+    motion_root = './llava/eval/anchor_videos/slowfast_feature/'
     motion_feat_list = []
     # find the max motion token
     max_motion_idx = sorted(os.listdir(os.path.join(motion_root, image_id)))[-1].split('_')[1]
@@ -138,7 +137,7 @@ def preprocess_qwen(sources, tokenizer: transformers.PreTrainedTokenizer, has_im
     targets = torch.tensor(targets, dtype=torch.long)
     return input_ids
 
-def eval_model(args):
+def cal_anchor_matrix(args):
 
     # Model
     disable_torch_init()
@@ -157,7 +156,7 @@ def eval_model(args):
     personr1 = []
     matrix = np.zeros((5, 5))
     np.fill_diagonal(matrix, 0.5)
-    print(matrix)
+    # print(matrix)
 
     inp = "Now you will receive two videos. The first video:\n <image><image>. The second video:\n <image><image>. Please watch these videos carefully, and then answer the following question: Comparing with the first video, how do you assess the quality of the second video?"
     with open(json_) as f:
@@ -166,9 +165,10 @@ def eval_model(args):
         for i, llddata in enumerate(tqdm(iqadata, desc="Evaluating [{}]".format(json_.split("/")[-1]))):
 
             filename = llddata["img_path"]
+            print("filename", filename)
             llddata["logits"] = defaultdict(float)
             cur_prompt = args.extra_prompt + inp
-            print(cur_prompt)
+            # print(cur_prompt)
             conv = conv_templates[args.conv_mode].copy()
             conv.append_message(conv.roles[0], cur_prompt)
             conv.append_message(conv.roles[1], "The quality of the second video is")
@@ -226,7 +226,7 @@ def eval_model(args):
             llddata["logits"]["similar"] += output_logits.mean(0)[4428].item()
             llddata["logits"]["worse"] += output_logits.mean(0)[10960].item()
             llddata["logits"]["inferior"] += output_logits.mean(0)[37179].item()
-            print(llddata["logits"])
+            # print(llddata["logits"])
 
             llddata["pr_score"] = wa5(llddata["logits"])
 
@@ -262,28 +262,12 @@ def eval_model(args):
                 matrix[4,3]=llddata["pr_score"]
                 matrix[3,4]=1-llddata["pr_score"]           
 
-            print(matrix)
-            print("np.array(")
-            print(np.array2string(matrix, separator=', ', formatter={'float_kind': lambda x: f"{x:.8e}"}))
-            print(", dtype=np.float32)")
+            # print(matrix)
+            # print("np.array(")
+            # print(np.array2string(matrix, separator=', ', formatter={'float_kind': lambda x: f"{x:.8e}"}))
+            # print(", dtype=np.float32)")
+
+        return matrix
 
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="/mnt/shared-storage-user/ailab-pceval/zhuxiangyang/caolinhan/weights/llava_qwen_stage2_no_lable_refinement/")
-    parser.add_argument("--model-base", type=str, default=None)
-    parser.add_argument("--image-folder", type=str, default="")
-    parser.add_argument("--extra-prompt", type=str, default="")
-    parser.add_argument("--question-file", type=str, default="tables/question.jsonl")
-    parser.add_argument("--answers-file", type=str, default="answer.jsonl")
-    parser.add_argument("--conv-mode", type=str, default="llava_v1")
-    parser.add_argument("--num-chunks", type=int, default=1)
-    parser.add_argument("--chunk-idx", type=int, default=0)
-    parser.add_argument("--temperature", type=float, default=0.2)
-    parser.add_argument("--top_p", type=float, default=None)
-    parser.add_argument("--num_beams", type=int, default=1)
-    parser.add_argument("--test_size", type=int, default=10000000)
-    args = parser.parse_args()
-
-    eval_model(args)

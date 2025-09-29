@@ -1,42 +1,42 @@
 [
     {
-      "img_path": ["anchor_1.mp4","anchor_2.mp4"],
+      "img_path": ["anchor_1.mp4","anchor_2.mp4"]
 
     },
     {
-        "img_path": ["anchor_1.mp4","anchor_3.mp4"],
+        "img_path": ["anchor_1.mp4","anchor_3.mp4"]
        
     },
     {
-        "img_path": ["anchor_1.mp4","anchor_4.mp4"],
+        "img_path": ["anchor_1.mp4","anchor_4.mp4"]
        
     },
     {
-        "img_path": ["anchor_1.mp4","anchor_5.mp4"],
+        "img_path": ["anchor_1.mp4","anchor_5.mp4"]
         
     },
     {
-      "img_path": ["anchor_2.mp4","anchor_3.mp4"],
+      "img_path": ["anchor_2.mp4","anchor_3.mp4"]
 
     },
     {
-        "img_path": ["anchor_2.mp4","anchor_4.mp4"],
+        "img_path": ["anchor_2.mp4","anchor_4.mp4"]
        
     },
     {
-        "img_path": ["anchor_2.mp4","anchor_5.mp4"],
+        "img_path": ["anchor_2.mp4","anchor_5.mp4"]
         
     },
     {
-        "img_path": ["anchor_3.mp4","anchor_4.mp4"],
+        "img_path": ["anchor_3.mp4","anchor_4.mp4"]
        
     },
     {
-        "img_path": ["anchor_3.mp4","anchor_5.mp4"],
+        "img_path": ["anchor_3.mp4","anchor_5.mp4"]
         
     },
     {
-      "img_path": ["anchor_4.mp4","anchor_5.mp4"],
+      "img_path": ["anchor_4.mp4","anchor_5.mp4"]
       
   }
 ]
