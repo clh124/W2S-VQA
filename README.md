@@ -3,6 +3,8 @@
 # Towards Generalized Video Quality Assessment: A Weak-to-Strong Learning Paradigm
 
 
+<div align="left">
+
 ## Installation
 
 ```bash
