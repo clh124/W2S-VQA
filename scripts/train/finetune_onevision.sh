@@ -5,7 +5,7 @@
 #export NCCL_SOCKET_IFNAME=eth0
 #export NCCL_DEBUG=INFO
 
-LLM_VERSION="/mnt/shared-storage-user/ailab-pceval/xxx-3/xxx-2/weights/llava-ov-chat-qwen2_slowfast/" 
+LLM_VERSION="/mnt/shared-storage-user/xxx-5/xxx-3/xxx-2/weights/llava-ov-chat-qwen2_slowfast/" 
 # for 7b model we recommend bs=1, accum=2, 16 nodes, 128 gpus, lr=1e-5, warmup=0.03
 # for 72b model we recommend bs=1, accum=1, 32 nodes, 256 gpus, lr=1e-5, warmup=0.03
 LLM_VERSION_CLEAN="${LLM_VERSION//\//_}"
@@ -30,8 +30,8 @@ deepspeed --include localhost:0,1,2,3,4,5,6,7 --master_port 25801 ./llava/train/
     --lora_enable False \
     --mm_tunable_parts mm_vision_tower,mm_mlp_adapter,mm_slowfast_projector \
     --video_folder /mnt/shared-storage-user/xxx-3/tos/xxx-1/xxx-2/data/data/xxx-2_data/video_database/train_30w/videos \
-    --slowfast_feature_folder /mnt/shared-storage-user/ailab-pceval/xxx-3/xxx-2/data/slowfast_feature/ \
-    --image_folder /mnt/shared-storage-user/ailab-pceval/xxx-3/xxx-2/data/mnt/nvme1n1/xxx-4/train_10w/dis_image3/ \
+    --slowfast_feature_folder /mnt/shared-storage-user/xxx-5/xxx-3/xxx-2/data/slowfast_feature/ \
+    --image_folder /mnt/shared-storage-user/xxx-5/xxx-3/xxx-2/data/mnt/nvme1n1/xxx-4/train_10w/dis_image3/ \
     --mm_vision_tower_lr 2e-6 \
     --vision_tower ${VISION_MODEL_VERSION} \
     --mm_projector_type mlp2x_gelu \
@@ -43,7 +43,7 @@ deepspeed --include localhost:0,1,2,3,4,5,6,7 --master_port 25801 ./llava/train/
     --image_grid_pinpoints  "(1x1),...,(6x6)" \
     --mm_patch_merge_type spatial_unpad \
     --bf16 True \
-    --output_dir /mnt/shared-storage-user/ailab-pceval/xxx-3/xxx-2/weights/llava_qwen_stage1_hard_labeling/ \
+    --output_dir /mnt/shared-storage-user/xxx-5/xxx-3/xxx-2/weights/llava_qwen_stage1_hard_labeling/ \
     --num_train_epochs 1 \
     --per_device_train_batch_size 1 \
     --per_device_eval_batch_size 1 \

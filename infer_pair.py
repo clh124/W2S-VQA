@@ -226,16 +226,16 @@ def eval_model(args):
         ]
     
     motion_features = [
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_live_vqc/",
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_konvid_1k/",
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_youtube_ugc/",
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/live_yt_gaming_slowfast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/cgvds_slowfast_feature/",      
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/LSVQ_Train_SlowFast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/LSVQ_Test_SlowFast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/kvq_slowfast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/waterloo_slowfast_feature/",
-        "/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/data/slowfast_feature/live_hfr_slowfast_feature/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_live_vqc/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_konvid_1k/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/slowfast_feature_youtube_ugc/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/live_yt_gaming_slowfast_feature/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/cgvds_slowfast_feature/",      
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/LSVQ_Train_SlowFast_feature/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/LSVQ_Test_SlowFast_feature/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/kvq_slowfast_feature/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/waterloo_slowfast_feature/",
+        "/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/data/slowfast_feature/live_hfr_slowfast_feature/",
     ]
     anchor_image_path = "./llava/eval/anchor_videos/videos/"
     # anchor_image_path = "/data2/xxx-2/video_database/train_70w/videos/"
@@ -397,7 +397,7 @@ def eval_model(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="/mnt/shared-storage-user/ailab-pceval/xxx-1/xxx-2/weights/llava_qwen_stage1")
+    parser.add_argument("--model-path", type=str, default="/mnt/shared-storage-user/xxx-5/xxx-1/xxx-2/weights/llava_qwen_stage1")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--image-folder", type=str, default="")
     parser.add_argument("--extra-prompt", type=str, default="")
