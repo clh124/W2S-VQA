@@ -10,7 +10,7 @@
 ```bash
 conda create -n w2s_vqa python=3.10
 conda activate w2s_vqa
-pip install -r requirements.txt
+pip install -e ".[train]"
 ```
 
 ## Training
