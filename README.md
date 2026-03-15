@@ -1,6 +1,6 @@
 <div align="center">
 
-# Towards Generalized Video Quality Assessment: A Weak-to-Strong Learning Paradigm
+# Generalizable Video Quality Assessment via Weak-to-Strong Learning
 
 
 <div align="left">
