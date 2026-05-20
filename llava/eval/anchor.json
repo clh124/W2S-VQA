@@ -1,0 +1,91 @@
+{
+  "anchors": [
+    {
+      "id": "anchor_1",
+      "img_path": "anchor_1.mp4",
+      "mos": 39.563524
+    },
+    {
+      "id": "anchor_2",
+      "img_path": "anchor_2.mp4",
+      "mos": 50.231094
+    },
+    {
+      "id": "anchor_3",
+      "img_path": "anchor_3.mp4",
+      "mos": 60.624043
+    },
+    {
+      "id": "anchor_4",
+      "img_path": "anchor_4.mp4",
+      "mos": 69.425189
+    },
+    {
+      "id": "anchor_5",
+      "img_path": "anchor_5.mp4",
+      "mos": 78.03194
+    }
+  ],
+  "pairs": [
+    {
+      "anchors": [
+        "anchor_1",
+        "anchor_2"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_1",
+        "anchor_3"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_1",
+        "anchor_4"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_1",
+        "anchor_5"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_2",
+        "anchor_3"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_2",
+        "anchor_4"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_2",
+        "anchor_5"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_3",
+        "anchor_4"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_3",
+        "anchor_5"
+      ]
+    },
+    {
+      "anchors": [
+        "anchor_4",
+        "anchor_5"
+      ]
+    }
+  ]
+}
