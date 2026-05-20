@@ -7,9 +7,9 @@
     <a href="https://huggingface.co/kkkkkklinhan/llava_qwen_slowfast_w2s_stage3"><img src="https://img.shields.io/badge/Model-Release-orange"></a>
    </div>
 
-  <div>
+<div>
       <a href="https://scholar.google.com/citations?user=WmE6necAAAAJ&hl=zh-CN" target="_blank">Linhan Cao</a><sup>1</sup><sup>*</sup>,
-      <a href="https://scholar.google.com/citations?hl=zh-CN&user=nDlEBJ8AAAAJ" target="_blank">Wei Sun</a><sup>2</sup><sup>*</sup>,
+      <a href="https://scholar.google.com/citations?hl=zh-CN&user=nDlEBJ8AAAAJ" target="_blank">Wei Sun</a><sup>2</sup><sup>*</sup><sup>†</sup>,
       <a href="https://scholar.google.com/citations?hl=zh-CN&user=k7YfbnEAAAAJ" target="_blank">Xiangyang Zhu</a><sup>3</sup>,
       Kaiwei Zhang<sup>3</sup>,
       Jun Jia<sup>1</sup>,
@@ -27,7 +27,7 @@
   <sup>1</sup>Shanghai Jiaotong University,  <sup>2</sup>East China Normal University, <sup>3</sup>Shanghai Artificial Intelligence Laboratory
        </div>   
 <div>
-<sup>*</sup>Equal contribution. <sup>#</sup>Corresponding author. 
+<sup>*</sup>Equal contribution. <sup>#</sup>Corresponding author. <sup>†</sup>Project lead. 
 
 <p align="center">
     <img src="teaser.png" style="max-width:100%; height:auto;">
